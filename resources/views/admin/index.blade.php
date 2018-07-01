@@ -1,0 +1,9 @@
+@extends('layout.footeradmin')
+@section('content')
+@endsection
+@extends('layout.bodyadmin')
+@section('content')
+@endsection
+@extends('layout.headeradmin')
+@section('content')
+@endsection

@@ -1,0 +1,39 @@
+html , body{
+    font-family: "open sans",Arial,sans-serif;
+    background-color: #f3f3f4;
+    color: #676a6c;
+    height: 100%;
+}
+#side-menu{
+  background-color: #2f4050;
+  padding: 0px;
+
+}
+.height{
+  height: 100%;
+}
+ .head2{
+
+  text-align: center;
+  margin: 10px 0px;
+  font-size: 35px;
+
+}
+.box{
+  border: 1px dotted red;
+}
+
+.display-table{
+  display: table;
+  padding: 0px;
+}
+.display-table-row{
+  display: table-row;
+}
+.display-table-cell{
+  display: table-cell;
+  float: none;
+}
+.valign-top{
+  vertical-align: top;
+}
