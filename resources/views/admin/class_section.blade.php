@@ -31,7 +31,7 @@
 
         <div class="modal fade " id="addclass" style="left: 230px;">
             <div class="modal-dialoge modal-lg">
-                <div class="modal-content text-center">
+                <div class="modal-content text-center"style="margin-top: 138px;width: 656px;margin-left: 113px;">
                     <div class="modal-header">
                         <div class="modal-title">
                             <h2><b>Add Class You Want</b></h2>
@@ -61,7 +61,7 @@
         </div>
         <div class="modal fade " id="deleteclass" style="left: 230px;">
             <div class="modal-dialoge modal-lg">
-                <div class="modal-content text-center">
+                <div class="modal-content text-center" style="margin-top: 138px;width: 656px;margin-left: 113px;">
                     <div class="modal-header">
                         <div class="modal-title">
                             <h2><b>Delete Class You Want</b></h2>
@@ -98,7 +98,7 @@
         </div>
         <div class="modal fade " id="add_class_section" style="left: 230px;">
             <div class="modal-dialoge modal-lg">
-                <div class="modal-content text-center">
+                <div class="modal-content text-center" style="margin-top: 138px;width: 695px;margin-left: 51px;" >
                     <div class="modal-header">
                         <div class="modal-title">
                             <h2><b>Join Class & Section</b></h2>
@@ -109,11 +109,11 @@
                         <form action="{{asset('/add_cls_sec')}}" method="POST" enctype="multipart/form-data">
                             {{csrf_field()}}
                             <div class="form-group row">
-                                <div class="col-md-4">
+                                <div class="col-md-4" style="padding-left: 46px;font-size: 17px;margin-top: 8px;">
                                     <label for="">Class</label>
                                 </div>
-                                <div class="col-md-8">
-                                    <select id="disabledSelect" class="form-control" name="cls">
+                                <div class="col-md-8" style="padding-right: 249px;">
+                                    <select id="disabledSelect" class="form-control" name="cls" style="margin-top: 6px;">
                                         <option>Choose</option>
                                         @foreach ($classes as $class)
                                             <option>{{$class->class}}</option>
@@ -122,10 +122,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-4">
+                                <div class="col-md-4" style="font-size: 16px;padding-left: 36px;padding-top: 3px;">
                                     <label for="">Section</label>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-8" style="padding-right: 249px;">
                                     <select id="disabledSelect" class="form-control" name="sec">
                                         <option>Choose</option>
                                         @foreach ($sections as $section)
@@ -137,7 +137,7 @@
 
                             <div class="form-group row">
                                 <div class="col-md-12">
-                                    <button class="btn btn-primary pull-right" type="submit">Confirm</button>
+                                    <button class="btn btn-primary pull-right" type="submit" style="margin-right: 76px;margin-top: 7px;">Confirm</button>
                                 </div>
                             </div>
 
@@ -149,7 +149,7 @@
         </div>
         <div class="modal fade " id="addsection" style="left: 230px;">
             <div class="modal-dialoge modal-lg">
-                <div class="modal-content text-center">
+                <div class="modal-content text-center" style="margin-top: 138px;width: 656px;margin-left: 113px;">
                     <div class="modal-header">
                         <div class="modal-title">
                             <h2><b>Add Section You Want</b></h2>
@@ -179,7 +179,7 @@
         </div>
         <div class="modal fade " id="deletesection" style="left: 230px;">
             <div class="modal-dialoge modal-lg">
-                <div class="modal-content text-center">
+                <div class="modal-content text-center" style="margin-top: 138px;width: 656px;margin-left: 113px;">
                     <div class="modal-header">
                         <div class="modal-title">
                             <h2><b>Delete Section You Want</b></h2>

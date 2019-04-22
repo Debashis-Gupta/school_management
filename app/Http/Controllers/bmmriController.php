@@ -2,6 +2,7 @@
 	
 	namespace App\Http\Controllers;
 	
+	use App\admission_request;
 	use App\eight;
 	use App\five;
 	use App\four;
@@ -14,13 +15,23 @@
 	use App\six;
 	use App\threes;
 	use App\two;
-	use Barryvdh\DomPDF\PDF;
-	use Dompdf\Dompdf;
+
+//	use Knp\Snappy\Pdf;
+//	use Barryvdh\DomPDF\PDF;
+	use Barryvdh\DomPDF\Facade as PDF;
+
+//	use Barryvdh\DomPDF\PDF;
+//	use Dompdf\Dompdf;
 	use Illuminate\Http\Request;
-	use App\admission_request;
+	
 	
 	class bmmriController extends Controller {
 		
+		/**
+		 * @param Request $req
+		 *
+		 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+		 */
 		public function fill( Request $req ) {
 			
 			
@@ -87,9 +98,9 @@
 					$std->admission_roll = $new_roll;
 				}
 			} elseif ( $std->class == 'Four' ) {
-				$std_three = $std->where( 'class', '=', 'Four' )->orderby( 'id', 'desc' )->first();
+				$std_four = $std->where( 'class', '=', 'Four' )->orderby( 'id', 'desc' )->first();
 //            $prev_roll=$std_four['admission_roll'];
-				if ( $std_one == null ) {
+				if ( $std_four == null ) {
 					$new_roll            = 1;
 					$std->admission_roll = $new_roll;
 				} else {
@@ -147,12 +158,14 @@
 				if ( $std_nine == null ) {
 					$new_roll            = 1;
 					$std->admission_roll = $new_roll;
-				} else {
+				}
+				else {
 					$prev_roll           = $std_nine['admission_roll'];
 					$new_roll            = $prev_roll + 1;
 					$std->admission_roll = $new_roll;
 				}
-			} elseif ( $std->class == 'Play' ) {
+			}
+			elseif ( $std->class == 'Play' ) {
 				$std_play = $std->where( 'class', '=', 'Play' )->orderby( 'id', 'desc' )->first();
 //            $prev_roll=$std_one['admission_roll'];
 				if ( $std_play == null ) {
@@ -208,56 +221,34 @@
 			$std->contact_no         = $cn;
 			
 			if ( $req->hasFile( 'image' ) ) {
-				$last_id=$father_cell;
+				$last_id   = $father_cell;
 				$imagename = $last_id . '.' . $req->file( 'image' )->getClientOriginalExtension();
 				$req->file( 'image' )->move(
 					base_path() . '/storage/image', $imagename
 				);
-				
+
 				$std->image = $imagename;
-				//dd( $imagename );
+				//dd(  );
 			} else {
 				dd( 'No image was found' );
 			}
 			
 			$std->save();
-// ekane ekta kaj korte hobe j application korbe tar id fetch korte hobe
-// etar jonno admission_request er
-//			$last_id   = $std->orderby( 'id', 'desc' )->first()->pluck( 'id' );
-//			$imagename = $last_id . '.' . $req->file( 'image' )->getClientOriginalExtension();
-//			$req->file( 'image' )->move(
-//				base_path() . '/storage/image', $imagename
-//			);
-//			$std->image = $imagename;
-//			$std->save()->where( 'id', '=', $last_id );
-
-
-//        here i want to generate a pdf that when the user hit the submit button
-//	    he/she will get the admit card as pdf
-//      ekane name ,admission roll,image,applied class and applied group takbe
-//	    start of pdf generation
 			
-			
+			$imagename1=storage_path().'/image/'.$imagename;
+			//dd($imagename1);
 			$data = [
 				'name'  => $name,
 				'roll'  => $new_roll,
 				'group' => $group,
 				'class' => $class,
-				'image' =>$imagename
+				'image' => $imagename1
 			];
-			$content=file_get_contents('http://localhost/bmmri-project/public/blank');
-			$dompdf = new Dompdf();
-			$dompdf->loadHtml($content);
-			$dompdf->render();
-			$dompdf->setPaper('Legal','Portrait');
-			return $dompdf->stream();
-	  
-			return $pdf->download( 'admissionform.pdf' );
+			$pdf  = PDF::loadView( 'pdf.admissionform', $data );
 
-//	    end of pdf generation
+			return $pdf->download( 'admissionform'.'pdf' );
 			
-			
-			return redirect( '/admin' );
+			return redirect( '/' );
 			
 		}
 //above code for filling form
@@ -290,6 +281,7 @@
 			$cn          = $req->input( "cn" );
 			$aust        = $req->input( "aust" );
 			$pi          = $req->input( "pi" );
+			$img        = $req->input('image');
 			
 			
 			//for class twooooooooooooooooooooooo
@@ -321,6 +313,8 @@
 				$one->upazilla           = $upazilla;
 				$one->previous_institute = $pi;
 				$one->contact_no         = $cn;
+				$one->image         = $img;
+				
 				$one->save();
 				
 				return redirect( '/admin' );
@@ -353,6 +347,7 @@
 				$two->upazilla           = $upazilla;
 				$two->previous_institute = $pi;
 				$two->contact_no         = $cn;
+				$two->image         = $img;
 				$two->save();
 				
 				return redirect( '/admin' );
@@ -385,6 +380,7 @@
 				$three->upazilla           = $upazilla;
 				$three->previous_institute = $pi;
 				$three->contact_no         = $cn;
+				$three->image         = $img;
 				$three->save();
 				
 				return redirect( '/admin' );
@@ -417,6 +413,7 @@
 				$four->upazilla           = $upazilla;
 				$four->previous_institute = $pi;
 				$four->contact_no         = $cn;
+				$four->image         = $img;
 				$four->save();
 				
 				return redirect( '/admin' );
@@ -449,6 +446,7 @@
 				$five->upazilla           = $upazilla;
 				$five->previous_institute = $pi;
 				$five->contact_no         = $cn;
+				$five->image         = $img;
 				$five->save();
 				
 				return redirect( '/admin' );
@@ -481,6 +479,7 @@
 				$six->upazilla           = $upazilla;
 				$six->previous_institute = $pi;
 				$six->contact_no         = $cn;
+				$six->image         = $img;
 				$six->save();
 				
 				return redirect( '/admin' );
@@ -513,6 +512,7 @@
 				$seven->upazilla           = $upazilla;
 				$seven->previous_institute = $pi;
 				$seven->contact_no         = $cn;
+				$seven->image         = $img;
 				$seven->save();
 				
 				return redirect( '/admin' );
@@ -545,6 +545,7 @@
 				$eight->upazilla           = $upazilla;
 				$eight->previous_institute = $pi;
 				$eight->contact_no         = $cn;
+				$eight->image         = $img;
 				$eight->save();
 				
 				return redirect( '/admin' );
@@ -577,6 +578,7 @@
 				$nine->upazilla           = $upazilla;
 				$nine->previous_institute = $pi;
 				$nine->contact_no         = $cn;
+				$nine->image         = $img;
 				$nine->save();
 				
 				return redirect( '/admin' );
@@ -609,6 +611,7 @@
 				$kg->upazilla           = $upazilla;
 				$kg->previous_institute = $pi;
 				$kg->contact_no         = $cn;
+				$kg->image         = $img;
 				$kg->save();
 				
 				return redirect( '/admin' );
@@ -641,6 +644,7 @@
 				$play->upazilla           = $upazilla;
 				$play->previous_institute = $pi;
 				$play->contact_no         = $cn;
+				$play->image         = $img;
 				$play->save();
 				
 				return redirect( '/admin' );
@@ -673,6 +677,7 @@
 				$nur->upazilla           = $upazilla;
 				$nur->previous_institute = $pi;
 				$nur->contact_no         = $cn;
+				$nur->image         = $img;
 				$nur->save();
 				
 				return redirect( '/admin' );
@@ -690,3 +695,36 @@
 			
 		}
 	}
+	
+	
+//work-sheet
+	
+	// ekane ekta kaj korte hobe j application korbe tar id fetch korte hobe
+	// etar jonno admission_request er
+	//			$last_id   = $std->orderby( 'id', 'desc' )->first()->pluck( 'id' );
+	//			$imagename = $last_id . '.' . $req->file( 'image' )->getClientOriginalExtension();
+	//			$req->file( 'image' )->move(
+	//				base_path() . '/storage/image', $imagename
+	//			);
+	//			$std->image = $imagename;
+	//			$std->save()->where( 'id', '=', $last_id );
+	
+	
+	//        here i want to generate a pdf that when the user hit the submit button
+	//	    he/she will get the admit card as pdf
+	//      ekane name ,admission roll,image,applied class and applied group takbe
+	//	    start of pdf generation
+
+
+//pdf try
+	//$content=file_get_contents('http://localhost/bmmri-project/public/pdf');
+	//			$dompdf = new Dompdf();
+	//			$dompdf->loadHtmlFile('pdf.admissionform',$data);
+	//			$dompdf->render();
+	//			$dompdf->setPaper('Legal','Portrait');
+	//return $dompdf->stream();
+	
+	//			return $dompdf->download( 'admissionform.pdf' );
+	
+	//	    end of pdf generation
+	

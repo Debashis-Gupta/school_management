@@ -154,12 +154,14 @@
                 </div>
 
             </form>
-            <form method="POST" enctype="multipart/form-data" action="{{asset('blankform_admission')}}" style="margin-top: -66px;">
+            <form method="POST" enctype="multipart/form-data" action="{{asset('blankform')}}" style="margin-top: -66px;">
                 {{csrf_field()}}
                 <div class="form-group row">
 
                     <div class="form-group ">
+                        {{--<a href="{{URL :: to('/blankform')}}" ><button class="btn btn-success pull-left" type="submit">Download Blank Form</button></a>--}}
                         <button class="btn btn-success pull-left" type="submit">Download Blank Form</button>
+
                     </div>
 
                 </div>

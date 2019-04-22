@@ -16,6 +16,7 @@
 	use Dompdf\Dompdf;
 	use Illuminate\Http\Request;
 	use Illuminate\Support\Facades\App;
+	use Illuminate\Foundation\Console\Presets\Bootstrap;
 	
 	class adminController extends Controller {
 		function fill( Request $req ) {
@@ -159,23 +160,35 @@
 			
 		}
 		
+		/**
+		 * @param Request $req
+		 *
+		 * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+		 */
+		public  function blankform(Request $req){
+			$file= storage_path(). "/document/ad_form.pdf";
+			//dd($file);
+			return response()->download($file);
+		}
 		
-		//			$pdf = PDF::loadView('admin/blankform_admission');
-//			return $pdf->download('admin.pdf');
-//        $data=['data'=>'hello'];
-//			$pdfContent = file_get_contents( "http://localhost/bmmri-project/public/blank" );
-//
-//			$pdf = App::make('dompdf.wrapper');
-//
-//			$pdf->loadHTML($pdfContent);
-//			//$pdf->setPaper( 'L', 'landscape' );
-//			$pdf->render();
-//			return $pdf->stream();
-//			return $pdf->download( 'blankform_admission.pdf' );
-//			//return $pdf->inline();
-//		}
+		
+		
 	}
-
-
-
-
+	
+	
+	
+	
+	//	HP017APURBO		$pdf = PDF::loadView('admin/blankform_admission');
+	//			return $pdf->download('admin.pdf');
+	//        $data=['data'=>'hello'];
+	//			$pdfContent = file_get_contents( "http://localhost/bmmri-project/public/blank" );
+	//
+	//			$pdf = App::make('dompdf.wrapper');
+	//
+	//			$pdf->loadHTML($pdfContent);
+	//			//$pdf->setPaper( 'L', 'landscape' );
+	//			$pdf->render();
+	//			return $pdf->stream();
+	//			return $pdf->download( 'blankform_admission.pdf' );
+	//			//return $pdf->inline();
+	//		}

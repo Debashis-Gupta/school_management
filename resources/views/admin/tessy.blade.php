@@ -21,6 +21,13 @@
     <body>
       <div class="container">
           <h4 class="text-center do" >Applicant Information</h4>
+           @foreach($de as $row)
+             <center> <img src="{{'/bmmri-project/storage/image/'.$row->image}}" alt="" class="rounded text-center" style="width: 250px;height: 220px;" > </center>
+           @endforeach
+
+          {{--@foreach--}}
+          {{--<img src="{{'../storage/image/'.$de->image}}" alt="" class="rounded text-center">--}}
+          {{--@endforeach--}}
           <table class="table table-striped table-hover ">
 
               <thead>

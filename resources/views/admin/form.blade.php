@@ -9,7 +9,7 @@
   <body>
     <div class="container">
       <h2> Form Validation</h2>
-      <form action="/bmmri-project/public/formfill" autocomplete="on" method="post">
+      <form action="{{asset('formfil')}}" autocomplete="on" method="post">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="row">
           <div class="col-md-6">

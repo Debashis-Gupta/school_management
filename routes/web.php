@@ -90,18 +90,19 @@ Route::post('addsection','adminController@addsection');
 Route::post('add_cls_sec','adminController@add_cls_sec');
 Route::post('deleteclass','adminController@deleteclass');
 //Route::get('/pdf/admissionform','adminController@pdf');
-Route::post('blankform_admission','adminController@pdf');
+Route::post('blankform','adminController@blankform');
 
 Route::get('/admin/form',function(){
   return view('admin/form');
 });
-Route::post('/form','bmmriController@fill');
+Route::post('form','bmmriController@fill');
 
 Route::get('/sample',function(){
     return view('/pdf/admissionform');
 } );
 // sample try
 Route::post('/store','Controller@store')->name('file.store');
+
 
 
 
@@ -112,3 +113,4 @@ Route::view('headtest','layout.headeradmin');
 
 // blank form toiri kor
 Route::view('blank','admin.blankform_admission');
+Route::view('pdf','pdf.admissionform');

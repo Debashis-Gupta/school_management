@@ -8,15 +8,16 @@
 @section('content')
 <section class="content-header">
     <!-- /.col -->
-    <h2>hwllo petnei</h2>
 
-  <p>here is the application request</p>
+
+
 
   <div class="table-responsive" style="margin-top:30px">
 <table class="table table-striped table-hover table-condensed">
   <thead>
 
     <tr>
+        <th><strong>Image</strong></th>
       <th><strong>Applicant Roll</strong></th>
       <th><strong>Applicant Name</strong></th>
 
@@ -28,21 +29,32 @@
   </thead>
   <tbody>
 
- @foreach ($classes as $row)
-   <th>{{$row->admission_roll}}</th>
-      <th>{{$row->name}}</th>
 
-     <th>{{$row->class}}</th>
-      <th>{{$row->group}}</th>
-      <th>
+ @foreach ($classes as $row)
+     <tr>
+	 <?php
+	 $imagename=storage_path().'/image/'.$row->image;
+	// dd($imagename);
+	 ?>
+     <td>
+         {{--/<img src="{{$imagename}}" alt="">--}}
+         <img src="{{'../storage/image/'.$row->image}}" alt="" class="img-circle" style="width: 91px;">
+         {{--<img src="{{$imagename}}" alt="" class="rounded">--}}
+     </td>
+   <td>{{$row->admission_roll}}</td>
+      <td>{{$row->name}}</td>
+
+     <td>{{$row->class}}</td>
+      <td>{{$row->group}}</td>
+      <td>
         {{--<button type="button" name="button" class="btn btn-primary">Click</button>--}}
       <a href="{{URL :: to('/admin',$row->id)}}"><button type="button" name="button" class="btn btn-primary">Click</button></a>
-      </th>
-      <th>
+      </td>
+      <td>
       <a href="{{URL :: to('/admin/approve',$row->id)}}" ><button type="button" name="button" class="btn btn-primary">Approve</button></a>
         <button type="button" name="button" class="btn btn-danger">Delete</button>
 
-      </th>
+      </td>
     </tr>
     @endforeach
   </tbody>

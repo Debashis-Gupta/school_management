@@ -68,10 +68,13 @@
                 <p> <strong>Est.:</strong>2017, <strong>EIIN:</strong> 138327 </p>
             </div>
             <div class="head_color">
-                <h3>Admission Form</h3>
+                <h3>Admission Form </h3>
             </div>
             <div class="text-center">
-                <img src="{{base_path() . '/storage/image'.$image}}" class="rounded" alt="...">
+                <img src="{{$image}}" alt="" class="img-rounded">
+                {{--<img src="/var/www/html/bmmri-project/storage/image/.{{$image}}" alt="" class="rounded">--}}
+                {{--<img src=storage_path()."/image/".{{$image}} alt="" class="rounded">--}}
+                {{--<img src='/image/'.'{{$image}}' class="rounded" alt="...">--}}
             </div>
             <div class="row">
                 <div class="col-md-6 form_design">

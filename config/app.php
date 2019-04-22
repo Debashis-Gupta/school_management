@@ -234,7 +234,7 @@ return [
 
 //        add for pdf generator
         'PDF' => Barryvdh\DomPDF\Facade::class,
-      //  'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+      // 'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
       //  'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
     ],
 
